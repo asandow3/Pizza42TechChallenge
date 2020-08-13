@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node public/js/app.js",
-    "dev": "nodemon public/js/appapp.js"
+    "dev": "nodemon public/js/app.js"
   },
   "keywords": [],
   "author": "",
