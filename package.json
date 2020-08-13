@@ -12,8 +12,8 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node public/js/app.js",
+    "dev": "nodemon public/js/appapp.js"
   },
   "keywords": [],
   "author": "",
