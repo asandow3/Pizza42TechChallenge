@@ -45,5 +45,9 @@ app.use(function(err, req, res, next) {
   next(err, req, res);
 });
 
-// Listen on port 3000
-app.listen(3000, () => console.log("Application running on port 3000"));
+// Listen on port 3000 when local and PORT variable when Heroku
+let port = process.env.PORT;
+if (port == null || port == ""){
+	port = 3000
+}	
+app.listen(port, () => console.log("Application running on port "+port));
