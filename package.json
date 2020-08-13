@@ -26,8 +26,8 @@
   "bugs": {
     "url": "https://github.com/asandow3/Pizza42TechChallenge/issues"
   },
-  "engines":{
-	"node": "12.18.3"
+  "engines": {
+    "node": "12.18.3"
   },
   "homepage": "https://github.com/asandow3/Pizza42TechChallenge#readme"
 }
