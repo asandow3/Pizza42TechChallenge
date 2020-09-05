@@ -57,12 +57,12 @@ const updateUI = async () => {
 	//obtain the user information
 	const userProfile = await auth0.getUser();
 	//if email is verified show the order pizza button
-	console.log("EMAILVerified?? : "+userProfile["email_verified"])
+	/*console.log("EMAILVerified?? : "+userProfile["email_verified"])
 	if(userProfile["email_verified"])
 	{
 		console.log("email is verified");
 		document.getElementById("email-verified").classList.remove("hidden");
-	}	
+	}*/	
 	
     document.getElementById("ipt-user-profile").textContent = JSON.stringify(
       await auth0.getUser()
@@ -81,7 +81,7 @@ const callApi = async () => {
 
     // Make the call to the API, setting the token
     // in the Authorization header
-    const response = await fetch("/api/external", {
+    const response = await fetch("/api/private-scoped", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -98,6 +98,7 @@ const callApi = async () => {
 } catch (e) {
     // Display errors in the console
     console.error(e);
+	
   }
 };
 

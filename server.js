@@ -2,8 +2,12 @@ const express = require("express");
 const { join } = require("path");
 const app = express();
 const jwt = require("express-jwt");
+const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require("jwks-rsa");
 const authConfig = require("./auth_config.json");
+
+//Permission to access OrderPizza API.  Should be in the access token scope
+const checkScopes = jwtAuthz([ 'create:PizzaOrder' ]);
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
@@ -21,11 +25,33 @@ const checkJwt = jwt({
 // Serve static assets from the /public folder
 app.use(express.static(join(__dirname, "public")));
 
-app.get("/api/external", checkJwt, (req, res) => {
+// This route doesn't need authentication
+/*app.get('/api/public', function(req, res) {
+  res.json({
+    message: 'Hello from a public endpoint! You don\'t need to be authenticated to see this.'
+  });
+});*/
+
+// This route needs authentication
+/*app.get('/api/private', checkJwt, function(req, res) {
+  res.json({
+    message: 'Hello from a private endpoint! You need to be authenticated to see this.'
+  });
+});*/
+
+//endpoint checks for required scope; Passes in API parameters
+app.get('/api/private-scoped', checkJwt, checkScopes, function(req, res) {
+  res.json({
+    message: 'You are authenticated with a verified email and have a scope of create:PizzaOrder.  Your Pizza is ordered.'
+  });
+});
+
+//external endpoint
+/*app.get("/api/external", checkJwt, (req, res) => {
   res.send({
     msg: "Your access token was successfully validated!"
   });
-});
+});*/
 
 // Endpoint to serve the configuration file
 app.get("/auth_config.json", (req, res) => {
